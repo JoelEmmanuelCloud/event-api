@@ -27,7 +27,6 @@
         "@typescript-eslint/eslint-plugin": "^6.2.1",
         "@typescript-eslint/parser": "^6.2.1",
         "bcryptjs": "^2.4.3",
-        "cookie-parser": "^1.4.6",
         "eslint": "^8.46.0",
         "eslint-config-prettier": "^8.10.0",
         "eslint-plugin-prettier": "^5.0.0",
@@ -43,7 +42,6 @@
         "validator": "^13.11.0"
     },
     "devDependencies": {
-        "@types/cookie-parser": "^1.4.3",
         "@types/dotenv": "^8.2.0",
         "dotenv": "^16.3.1",
         "nodemon": "^3.0.1",
