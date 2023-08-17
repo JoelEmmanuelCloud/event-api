@@ -10,4 +10,28 @@ interface IUser extends Document {
     password: string;
 }
 
-export default IUser;
+
+interface User {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    birthDate: string;
+    city: string;
+    country: string;
+    email: string;
+    password: string;
+}
+
+
+interface SignupData {
+    firstName: string;
+    lastName: string;
+    birthDate: string;
+    city: string;
+    country: string;
+    email: string;
+    password: string;
+}
+
+export {User,
+    IUser, SignupData}
