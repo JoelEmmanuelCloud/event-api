@@ -52,7 +52,7 @@ const UserSchema: Schema<IUserDocument> = new Schema(
             minlength: 6,
         },
     },
-    // { timestamps: true }
+    { timestamps: true }
 );
 
 UserSchema.pre<IUserDocument>('save', async function (next) {
