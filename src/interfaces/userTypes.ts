@@ -36,6 +36,11 @@ interface SignupData {
     password: string;
 }
 
+interface SigninData {
+    email: string;
+    password: string;
+}
+
 export {User,
     IUser, SignupData
-    , IUserDocument}
+    , IUserDocument, SigninData}
