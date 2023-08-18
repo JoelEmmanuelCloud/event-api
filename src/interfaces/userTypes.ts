@@ -14,15 +14,9 @@ interface IUserDocument extends IUser, Document {
     comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-interface User {
+interface Payload {
     _id: string;
-    firstName: string;
-    lastName: string;
-    birthDate: string;
-    city: string;
-    country: string;
-    email: string;
-    password: string;
+    
 }
 
 
@@ -41,6 +35,6 @@ interface SigninData {
     password: string;
 }
 
-export {User,
+export {Payload,
     IUser, SignupData
     , IUserDocument, SigninData}
