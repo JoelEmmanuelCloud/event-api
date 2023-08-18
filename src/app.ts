@@ -1,6 +1,6 @@
 import express from 'express';
 import connectDB from './db/connectDB';
-import usersRouter from './routes/auth-route';
+import authRouter from './routes/auth-route';
 import notFoundMiddleware from './middleware/not-found';
 import errorHandlerMiddleware from './middleware/error-handler';
 import dotenv from 'dotenv';
@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/auth', authRouter);
 app.get('/', (req, res) => {
 
     res.send('Hello, Express!');
