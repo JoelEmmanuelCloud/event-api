@@ -13,4 +13,13 @@ const signupSchema = Joi.object({
   })
 }).prefs({ abortEarly: false });
 
-export default signupSchema;
+
+const signinSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().required()
+});
+
+
+
+export { signupSchema,
+        signinSchema};
