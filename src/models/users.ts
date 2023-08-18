@@ -1,15 +1,12 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-import { IUser } from '../interfaces/userTypes';
+import { IUserDocument } from '../interfaces/userTypes';
 
 const isEmailValidator = (value: string) => {
     return validator.isEmail(value);
 };
 
-export interface IUserDocument extends IUser, Document {
-    comparePassword(candidatePassword: string): Promise<boolean>;
-}
 
 const UserSchema: Schema<IUserDocument> = new Schema(
     {

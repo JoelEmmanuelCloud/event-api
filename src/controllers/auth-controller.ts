@@ -1,6 +1,6 @@
 import CustomError from '../error';
-import UserModel, { IUserDocument }  from '../models/users';
-import { SignupData } from '../interfaces/userTypes'
+import UserModel  from '../models/users';
+import { SignupData, IUserDocument } from '../interfaces/userTypes'
 
 
 

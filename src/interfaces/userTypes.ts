@@ -10,6 +10,9 @@ interface IUser extends Document {
     password: string;
 }
 
+interface IUserDocument extends IUser, Document {
+    comparePassword(candidatePassword: string): Promise<boolean>;
+}
 
 interface User {
     _id: string;
@@ -34,4 +37,5 @@ interface SignupData {
 }
 
 export {User,
-    IUser, SignupData}
+    IUser, SignupData
+    , IUserDocument}
