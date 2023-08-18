@@ -3,7 +3,7 @@ import Joi from 'joi';
 const signupSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  birthDate: Joi.date().iso().required(),
+  birthDate: Joi.string().required(),
   city: Joi.string().required(),
   country: Joi.string().required(),
   email: Joi.string().email().required(),
