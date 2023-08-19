@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 import { createJWT } from '../utils/jwt';
-import { signUpUser, signinUser } from '../controllers/auth-controller';
+import { signUpUser, signinUser } from '../controllers/user-controller';
 import { signupSchema, signinSchema } from '../validators/auth-validator';
 import { StatusCodes } from 'http-status-codes';
 
