@@ -16,9 +16,7 @@ interface IUserDocument extends IUser, Document {
 
 interface Payload {
     _id: string;
-    
 }
-
 
 interface SignupData {
     firstName: string;
@@ -35,6 +33,4 @@ interface SigninData {
     password: string;
 }
 
-export {Payload,
-    IUser, SignupData
-    , IUserDocument, SigninData}
+export { Payload, IUser, SignupData, IUserDocument, SigninData };

@@ -1,21 +1,18 @@
 import CustomError from '../errors';
-import UserModel  from '../models/users';
-import { SignupData, IUserDocument, SigninData } from '../interfaces/userTypes'
-
-
+import UserModel from '../models/users';
+import { SignupData, IUserDocument, SigninData } from '../interfaces/userTypes';
 
 async function signUpUser(signupData: SignupData): Promise<IUserDocument> {
     try {
-        
-        const existingUser = await UserModel.findOne({ email: signupData.email });
+        const existingUser = await UserModel.findOne({
+            email: signupData.email,
+        });
         if (existingUser) {
             throw new CustomError.BadRequestError('Email already exists');
         }
 
-        
         const newUser = new UserModel(signupData);
 
-        
         await newUser.save();
 
         return newUser;
@@ -23,7 +20,6 @@ async function signUpUser(signupData: SignupData): Promise<IUserDocument> {
         throw error;
     }
 }
-
 
 async function signinUser(signinData: SigninData): Promise<IUserDocument> {
     try {
@@ -47,8 +43,4 @@ async function signinUser(signinData: SigninData): Promise<IUserDocument> {
     }
 }
 
-
-export {
-    signUpUser,
-    signinUser
-}
+export { signUpUser, signinUser };

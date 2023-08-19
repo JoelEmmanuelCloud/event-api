@@ -1,7 +1,6 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import { IEventDocument } from '../interfaces/eventTypes';
 
-
 const EventSchema: Schema<IEventDocument> = new Schema(
     {
         description: {
@@ -17,9 +16,12 @@ const EventSchema: Schema<IEventDocument> = new Schema(
             required: true,
         },
     },
-    { timestamps: true }
+    { timestamps: true },
 );
 
 export interface IEventModel extends Model<IEventDocument> {}
 
-export const EventModel: IEventModel = mongoose.model<IEventDocument, IEventModel>('Event', EventSchema);
+export const EventModel: IEventModel = mongoose.model<
+    IEventDocument,
+    IEventModel
+>('Event', EventSchema);

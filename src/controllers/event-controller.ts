@@ -3,15 +3,18 @@ import { EventModel } from '../models/events';
 import { Event } from '../interfaces/eventTypes';
 import { ExtendedRequest } from '../middleware/authenticateUser';
 
-export async function createEvent(req: ExtendedRequest, res: Response): Promise<Event> {
+export async function createEvent(
+    req: ExtendedRequest,
+    res: Response,
+): Promise<Event> {
     const { description, dayOfWeek } = req.body;
-    const userId = req.userId
+    const userId = req.userId;
 
     try {
         const newEvent = new EventModel({
             description,
             dayOfWeek,
-            userId
+            userId,
         });
 
         await newEvent.save();
@@ -29,11 +32,14 @@ export async function createEvent(req: ExtendedRequest, res: Response): Promise<
     }
 }
 
-export async function getEvents(req: ExtendedRequest, res: Response): Promise<Event[]> {
+export async function getEvents(
+    req: ExtendedRequest,
+    res: Response,
+): Promise<Event[]> {
     try {
         const userId = req.userId;
-        const events = await EventModel.find({userId});
-        const formattedEvents: Event[] = events.map(event => ({
+        const events = await EventModel.find({ userId });
+        const formattedEvents: Event[] = events.map((event) => ({
             _id: event._id,
             description: event.description,
             dayOfWeek: event.dayOfWeek,
@@ -45,17 +51,23 @@ export async function getEvents(req: ExtendedRequest, res: Response): Promise<Ev
     }
 }
 
-
-
-export async function deleteEventsByDay(req: ExtendedRequest, res: Response): Promise<{ message: string }> {
+export async function deleteEventsByDay(
+    req: ExtendedRequest,
+    res: Response,
+): Promise<{ message: string }> {
     const userId = req.userId;
     const dayOfWeekToDelete = req.params.dayOfWeek;
 
     try {
-        const deletedEvents = await EventModel.deleteMany({ userId, dayOfWeek: dayOfWeekToDelete });
+        const deletedEvents = await EventModel.deleteMany({
+            userId,
+            dayOfWeek: dayOfWeekToDelete,
+        });
 
         if (deletedEvents.deletedCount > 0) {
-            return { message: `Events for ${dayOfWeekToDelete} have been deleted successfully.` };
+            return {
+                message: `Events for ${dayOfWeekToDelete} have been deleted successfully.`,
+            };
         } else {
             return { message: `No events found for ${dayOfWeekToDelete}.` };
         }
@@ -64,7 +76,10 @@ export async function deleteEventsByDay(req: ExtendedRequest, res: Response): Pr
     }
 }
 
-export async function getEventById(req: ExtendedRequest, res: Response): Promise<Event | null> {
+export async function getEventById(
+    req: ExtendedRequest,
+    res: Response,
+): Promise<Event | null> {
     const userId = req.userId;
     const eventId = req.params.eventId;
 
@@ -77,20 +92,29 @@ export async function getEventById(req: ExtendedRequest, res: Response): Promise
     }
 }
 
-export async function deleteEventById(req: ExtendedRequest, res: Response): Promise<{ message: string }> {
+export async function deleteEventById(
+    req: ExtendedRequest,
+    res: Response,
+): Promise<{ message: string }> {
     const userId = req.userId;
     const eventId = req.params.eventId;
 
     try {
-        const deletedEvent = await EventModel.findOneAndDelete({ _id: eventId, userId });
+        const deletedEvent = await EventModel.findOneAndDelete({
+            _id: eventId,
+            userId,
+        });
 
         if (!deletedEvent) {
-            return { message: `No event with ID ${eventId} found for the signed-in user.` };
+            return {
+                message: `No event with ID ${eventId} found for the signed-in user.`,
+            };
         }
 
-        return { message: `Event with ID ${eventId} has been deleted successfully.` };
+        return {
+            message: `Event with ID ${eventId} has been deleted successfully.`,
+        };
     } catch (error) {
         throw error;
     }
 }
-

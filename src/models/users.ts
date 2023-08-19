@@ -7,7 +7,6 @@ const isEmailValidator = (value: string) => {
     return validator.isEmail(value);
 };
 
-
 const UserSchema: Schema<IUserDocument> = new Schema(
     {
         firstName: {
@@ -49,7 +48,7 @@ const UserSchema: Schema<IUserDocument> = new Schema(
             minlength: 6,
         },
     },
-    { timestamps: true }
+    { timestamps: true },
 );
 
 UserSchema.pre<IUserDocument>('save', async function (next) {
@@ -60,12 +59,15 @@ UserSchema.pre<IUserDocument>('save', async function (next) {
 });
 
 UserSchema.methods.comparePassword = async function (
-    candidatePassword: string
+    candidatePassword: string,
 ): Promise<boolean> {
     const isMatch = await bcrypt.compare(candidatePassword, this.password);
     return isMatch;
 };
 
-const UserModel: Model<IUserDocument> = mongoose.model<IUserDocument>('User', UserSchema);
+const UserModel: Model<IUserDocument> = mongoose.model<IUserDocument>(
+    'User',
+    UserSchema,
+);
 
 export default UserModel;

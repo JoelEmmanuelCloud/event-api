@@ -1,4 +1,4 @@
-import { Document} from 'mongoose';
+import { Document } from 'mongoose';
 
 export interface Event {
     _id: string;
@@ -12,5 +12,3 @@ export interface IEventDocument extends Document {
     dayOfWeek: string;
     userId: string;
 }
-
-

@@ -7,7 +7,6 @@ import errorHandlerMiddleware from './middleware/error-handler';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 
-
 dotenv.config();
 
 const app = express();
@@ -18,13 +17,11 @@ app.use(morgan('dev'));
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/events', eventRouter);
 app.get('/', (req, res) => {
-
     res.send('Hello, Express!');
 });
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
-
 
 const port = Number(process.env.PORT) || 5000;
 

@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { Payload } from '../interfaces/userTypes';
 
-
 const createJWT = ({ payload }: { payload: Payload }): string => {
     const token = jwt.sign(payload, process.env.JWT_SECRET!, {
         expiresIn: process.env.JWT_LIFETIME!,
@@ -14,8 +13,4 @@ const isTokenValid = ({ token }: { token: string }): Payload => {
     return decodedToken;
 };
 
-
-export {
-    createJWT,
-    isTokenValid
-}
+export { createJWT, isTokenValid };
