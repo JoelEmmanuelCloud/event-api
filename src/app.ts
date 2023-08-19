@@ -1,6 +1,6 @@
 import express from 'express';
 import connectDB from './db/connectDB';
-import authRouter from './routes/auth-route';
+import userRouter from './routes/user-route';
 import eventRouter from './routes/event-route';
 import notFoundMiddleware from './middleware/not-found';
 import errorHandlerMiddleware from './middleware/error-handler';
@@ -14,11 +14,9 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/events', eventRouter);
-app.get('/', (req, res) => {
-    res.send('Hello, Express!');
-});
+
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
