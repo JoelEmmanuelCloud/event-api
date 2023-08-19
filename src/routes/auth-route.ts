@@ -44,13 +44,10 @@ router.post('/signin', async (req, res) => {
 
         const token = createJWT( {payload: { _id: user._id}} );
 
-        const userResponse = {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email
-        };
 
-        res.status(StatusCodes.OK).json({ token, user: userResponse });
+        res.status(StatusCodes.OK).json({ token, firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email });
     } catch (error) {
         const errorMessage = (error as Error).message;
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: errorMessage });
