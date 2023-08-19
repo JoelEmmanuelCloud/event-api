@@ -1,4 +1,4 @@
-import CustomError from '../error';
+import CustomError from '../errors';
 import UserModel  from '../models/users';
 import { SignupData, IUserDocument, SigninData } from '../interfaces/userTypes'
 
