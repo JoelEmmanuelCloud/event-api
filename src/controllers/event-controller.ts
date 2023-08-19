@@ -44,3 +44,24 @@ export async function getEvents(req: ExtendedRequest, res: Response): Promise<Ev
         throw error;
     }
 }
+
+
+
+export async function deleteEventsByDay(req: ExtendedRequest, res: Response): Promise<{ message: string }> {
+    const userId = req.userId;
+    const dayOfWeekToDelete = req.params.dayOfWeek;
+
+    try {
+        const deletedEvents = await EventModel.deleteMany({ userId, dayOfWeek: dayOfWeekToDelete });
+
+        if (deletedEvents.deletedCount > 0) {
+            return { message: `Events for ${dayOfWeekToDelete} have been deleted successfully.` };
+        } else {
+            return { message: `No events found for ${dayOfWeekToDelete}.` };
+        }
+    } catch (error) {
+        throw error;
+    }
+}
+
+
