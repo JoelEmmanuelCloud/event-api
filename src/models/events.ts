@@ -12,7 +12,7 @@ const EventSchema: Schema<IEventDocument> = new Schema(
             type: String,
             required: [true, 'Please provide the day of the week'],
         },
-        userId: { // Add this field to your schema
+        userId: {
             type: String,
             required: true,
         },
