@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { isTokenValid } from '../utils/jwt';
-import UnauthenticatedError from '../errors/unauthenticated';
 import { StatusCodes } from 'http-status-codes';
 
 
@@ -14,10 +13,6 @@ const authenticateUser = async (
   next: NextFunction
 ): Promise<void> => {
   const token = req.headers.authorization?.split(' ')[1];
-
-//   if (!token) {
-//     throw new UnauthenticatedError('Unauthorized Access');
-//   }
 
 if (!token) {
     res.status(StatusCodes.UNAUTHORIZED).json({
