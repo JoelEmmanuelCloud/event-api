@@ -64,4 +64,33 @@ export async function deleteEventsByDay(req: ExtendedRequest, res: Response): Pr
     }
 }
 
+export async function getEventById(req: ExtendedRequest, res: Response): Promise<Event | null> {
+    const userId = req.userId;
+    const eventId = req.params.eventId;
+
+    try {
+        const event = await EventModel.findOne({ _id: eventId, userId });
+
+        return event;
+    } catch (error) {
+        throw error;
+    }
+}
+
+export async function deleteEventById(req: ExtendedRequest, res: Response): Promise<{ message: string }> {
+    const userId = req.userId;
+    const eventId = req.params.eventId;
+
+    try {
+        const deletedEvent = await EventModel.findOneAndDelete({ _id: eventId, userId });
+
+        if (!deletedEvent) {
+            return { message: `No event with ID ${eventId} found for the signed-in user.` };
+        }
+
+        return { message: `Event with ID ${eventId} has been deleted successfully.` };
+    } catch (error) {
+        throw error;
+    }
+}
 
