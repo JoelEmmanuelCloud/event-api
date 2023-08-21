@@ -1,11 +1,11 @@
 import express from 'express';
 const router = express.Router();
 import { createJWT } from '../utils/jwt';
-import { signUpUser, signinUser } from '../controllers/user-controller';
-import { signupSchema, signinSchema } from '../validators/auth-validator';
+import { signUpUser, signInUser } from '../controllers/user-controller';
+import { signupSchema, signInSchema } from '../validators/user-validator';
 import { StatusCodes } from 'http-status-codes';
 
-router.post('/signup', async (req, res) => {
+router.post('/sign-up', async (req, res) => {
     const newUserSignupData = req.body;
 
     try {
@@ -29,18 +29,18 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.post('/signin', async (req, res) => {
-    const signinData = req.body;
+router.post('/sign-in', async (req, res) => {
+    const signInData = req.body;
 
     try {
-        const { error, value } = signinSchema.validate(signinData);
+        const { error, value } = signInSchema.validate(signInData);
 
         if (error) {
             res.status(StatusCodes.BAD_REQUEST).json({ errors: error.details });
             return;
         }
 
-        const user = await signinUser(value);
+        const user = await signInUser(value);
 
         const token = createJWT({ payload: { _id: user._id } });
 

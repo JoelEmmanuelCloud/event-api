@@ -1,6 +1,6 @@
 import CustomError from '../errors';
 import UserModel from '../models/users';
-import { SignupData, IUserDocument, SigninData } from '../interfaces/userTypes';
+import { SignupData, IUserDocument, SignInData } from '../interfaces/userTypes';
 
 async function signUpUser(signupData: SignupData): Promise<IUserDocument> {
     try {
@@ -21,9 +21,9 @@ async function signUpUser(signupData: SignupData): Promise<IUserDocument> {
     }
 }
 
-async function signinUser(signinData: SigninData): Promise<IUserDocument> {
+async function signInUser(signInData: SignInData): Promise<IUserDocument> {
     try {
-        const { email, password } = signinData;
+        const { email, password } = signInData;
 
         const user = await UserModel.findOne({ email });
 
@@ -43,4 +43,4 @@ async function signinUser(signinData: SigninData): Promise<IUserDocument> {
     }
 }
 
-export { signUpUser, signinUser };
+export { signUpUser, signInUser };

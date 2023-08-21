@@ -28,9 +28,9 @@ interface SignupData {
     password: string;
 }
 
-interface SigninData {
+interface SignInData {
     email: string;
     password: string;
 }
 
-export { Payload, IUser, SignupData, IUserDocument, SigninData };
+export { Payload, IUser, SignupData, IUserDocument, SignInData };
