@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { EventModel } from '../models/events';
 import { Event } from '../interfaces/eventTypes';
 import { ExtendedRequest } from '../middleware/authenticateUser';
