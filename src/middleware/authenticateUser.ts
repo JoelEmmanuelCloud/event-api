@@ -2,9 +2,17 @@ import { NextFunction, Request, Response } from 'express';
 import { isTokenValid } from '../utils/jwt';
 import { StatusCodes } from 'http-status-codes';
 
+// export interface ExtendedRequest extends Request {
+//     userId?: string;
+// }
+
 export interface ExtendedRequest extends Request {
     userId?: string;
-}
+    params: {
+      [key: string]: string; // Or use specific keys if needed
+    };
+  }
+  
 
 const authenticateUser = async (
     req: ExtendedRequest,
