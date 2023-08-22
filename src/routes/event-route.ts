@@ -16,7 +16,7 @@ import { createEventSchema } from '../validators/event-validator';
 const router = express.Router();
 
 router.post(
-    '/createEvent',
+    '/',
     authenticateUser,
     async (req: ExtendedRequest, res) => {
         try {
@@ -43,7 +43,7 @@ router.post(
 );
 
 router.get(
-    '/getEvents',
+    '/',
     authenticateUser,
     async (req: ExtendedRequest, res) => {
         try {
@@ -59,7 +59,7 @@ router.get(
 );
 
 router.delete(
-    '/deleteEvents/:dayOfWeek',
+    '/:dayOfWeek',
     authenticateUser,
     async (req: ExtendedRequest, res) => {
         try {
@@ -75,7 +75,7 @@ router.delete(
 );
 
 router.get(
-    '/getEvent/:eventId',
+    '/:id',
     authenticateUser,
     async (req: ExtendedRequest, res) => {
         try {
@@ -98,7 +98,7 @@ router.get(
 );
 
 router.delete(
-    '/deleteEvent/:eventId',
+    '/:id',
     authenticateUser,
     async (req: ExtendedRequest, res) => {
         try {
