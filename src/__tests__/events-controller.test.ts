@@ -1,3 +1,4 @@
+import { DeleteResult } from 'mongodb';
 import { ExtendedRequest } from '../middleware/authenticateUser';
 import { EventModel } from '../models/events';
 import { Response } from 'express';
@@ -278,3 +279,86 @@ describe('Delete Event by ID', () => {
   });
 });
 
+
+
+describe('Delete Events by Day', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('Should delete events for a specific day successfully!', async () => {
+    const mockUserId = 'mockUserId';
+    const mockDayOfWeek = 'Monday';
+
+    const mockRequest = {
+      userId: mockUserId,
+      params: { dayOfWeek: mockDayOfWeek },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const deletedEvents: DeleteResult = {
+      acknowledged: true,
+      deletedCount: 2,
+    };
+
+    const deleteManySpy = jest.spyOn(EventModel, 'deleteMany').mockResolvedValueOnce(deletedEvents);
+
+    const result = await deleteEventsByDay(mockRequest, mockResponse);
+
+    expect(deleteManySpy).toHaveBeenCalledWith({ userId: mockUserId, dayOfWeek: mockDayOfWeek });
+
+    expect(result).toEqual({
+      message: `Events for ${mockDayOfWeek} have been deleted successfully.`,
+    });
+
+    deleteManySpy.mockRestore();
+  });
+
+  it('Should handle "no events found" scenario', async () => {
+    const mockUserId = 'mockUserId';
+    const mockDayOfWeek = 'Saturday';
+
+    const mockRequest = {
+      userId: mockUserId,
+      params: { dayOfWeek: mockDayOfWeek },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const deletedEvents: DeleteResult = {
+      acknowledged: true,
+      deletedCount: 0,
+    };
+
+    const deleteManySpy = jest.spyOn(EventModel, 'deleteMany').mockResolvedValueOnce(deletedEvents);
+
+    const result = await deleteEventsByDay(mockRequest, mockResponse);
+
+    expect(deleteManySpy).toHaveBeenCalledWith({ userId: mockUserId, dayOfWeek: mockDayOfWeek });
+
+    expect(result).toEqual({
+      message: `No events found for ${mockDayOfWeek}.`,
+    });
+
+    deleteManySpy.mockRestore();
+  });
+
+  it('Should handle errors during event deletion by day', async () => {
+    const mockUserId = 'mockUserId';
+    const mockDayOfWeek = 'Wednesday';
+
+    const mockRequest = {
+      userId: mockUserId,
+      params: { dayOfWeek: mockDayOfWeek },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const deleteManySpy = jest.spyOn(EventModel, 'deleteMany').mockRejectedValueOnce(new Error('Mock error'));
+
+    await expect(deleteEventsByDay(mockRequest, mockResponse)).rejects.toThrow();
+
+    deleteManySpy.mockRestore();
+  });
+});
