@@ -6,7 +6,6 @@ export interface ExtendedRequest extends Request {
     userId?: string;
 }
 
-
 const authenticateUser = async (
     req: ExtendedRequest,
     res: Response,

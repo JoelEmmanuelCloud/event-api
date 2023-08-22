@@ -5,4 +5,4 @@ export default {
     collectCoverage: true,
     verbose: true,
     forceExit: true,
-  };
+};

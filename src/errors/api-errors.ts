@@ -33,9 +33,4 @@ class UnauthorizedError extends CustomAPIError {
     }
 }
 
-export {
-    CustomAPIError,
-    BadRequestError,
-    NotFoundError,
-    UnauthorizedError,
-};
+export { CustomAPIError, BadRequestError, NotFoundError, UnauthorizedError };

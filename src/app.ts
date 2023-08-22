@@ -17,7 +17,6 @@ app.use(morgan('dev'));
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/events', eventRouter);
 
-
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 

@@ -1,4 +1,8 @@
-import {BadRequestError, NotFoundError, UnauthorizedError} from '../errors/api-errors';
+import {
+    BadRequestError,
+    NotFoundError,
+    UnauthorizedError,
+} from '../errors/api-errors';
 import UserModel from '../models/users';
 import { SignupData, IUserDocument, SignInData } from '../interfaces/userTypes';
 

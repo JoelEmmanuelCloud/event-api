@@ -25,7 +25,7 @@ router.post('/sign-up', async (req, res) => {
             city: user.city,
             country: user.country,
             email: user.email,
-            __v: user.__v
+            __v: user.__v,
         };
 
         res.status(StatusCodes.CREATED).json(userResponse);
