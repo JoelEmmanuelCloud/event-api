@@ -81,7 +81,7 @@ export async function getEventById(
     res: Response,
 ): Promise<Event | null> {
     const userId = req.userId;
-    const eventId = req.params.eventId;
+    const eventId = req.params.id;
 
     try {
         const event = await EventModel.findOne({ _id: eventId, userId });
@@ -97,7 +97,7 @@ export async function deleteEventById(
     res: Response,
 ): Promise<{ message: string }> {
     const userId = req.userId;
-    const eventId = req.params.eventId;
+    const eventId = req.params.id;
 
     try {
         const deletedEvent = await EventModel.findOneAndDelete({
