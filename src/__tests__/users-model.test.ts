@@ -40,16 +40,15 @@ describe('User Schema', () => {
     expect(savedUser.city).toBe(newUser.city);
     expect(savedUser.country).toBe(newUser.country);
     expect(savedUser.email).toBe(newUser.email);
-    expect(savedUser.password).not.toBe(newUser.password); // Password should be hashed
-  }, 90000); // Increase the timeout value
+    expect(savedUser.password).not.toBe(newUser.password);
+  }, 90000);
 
   it('Should not create a user with invalid data', async () => {
     const invalidUser = {
-      // ... incomplete or invalid data
     };
 
     await expect(UserModel.create(invalidUser)).rejects.toThrow(mongoose.Error.ValidationError);
-  }, 90000); // Increase the timeout value
+  }, 90000);
 
   it('Should compare passwords correctly', async () => {
     const password = 'password123';
@@ -68,7 +67,7 @@ describe('User Schema', () => {
     const isMatch = await user.comparePassword(password);
 
     expect(isMatch).toBe(true);
-  }, 90000); // Increase the timeout value
+  }, 90000);
 
   it('Should return false for incorrect password comparison', async () => {
     const password = 'password123';
@@ -87,5 +86,5 @@ describe('User Schema', () => {
     const isMatch = await user.comparePassword('incorrectPassword');
 
     expect(isMatch).toBe(false);
-  }, 90000); // Increase the timeout value
+  }, 90000);
 });
