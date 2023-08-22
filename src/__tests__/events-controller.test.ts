@@ -137,7 +137,7 @@ describe('Get Event by ID', () => {
 
     const mockRequest = {
       userId: mockUserId,
-      params: { eventId: mockEventId },
+      params: { id: mockEventId },
     } as unknown as ExtendedRequest;
 
     const mockResponse = {} as Response;
@@ -166,7 +166,7 @@ describe('Get Event by ID', () => {
 
     const mockRequest = {
       userId: mockUserId,
-      params: { eventId: mockEventId },
+      params: { id: mockEventId },
     } as unknown as ExtendedRequest;
 
     const mockResponse = {} as Response;
@@ -184,7 +184,7 @@ describe('Get Event by ID', () => {
 
     const mockRequest = {
       userId: mockUserId,
-      params: { eventId: mockEventId },
+      params: { id: mockEventId },
     } as unknown as ExtendedRequest;
 
     const mockResponse = {} as Response;
@@ -213,7 +213,7 @@ describe('Delete Event by ID', () => {
 
     const mockRequest = {
       userId: mockUserId,
-      params: { eventId: mockEventId },
+      params: { id: mockEventId },
     } as unknown as ExtendedRequest;
 
     const mockResponse = {} as Response;
@@ -242,7 +242,7 @@ describe('Delete Event by ID', () => {
 
     const mockRequest = {
       userId: mockUserId,
-      params: { eventId: mockEventId },
+      params: { id: mockEventId },
     } as unknown as ExtendedRequest;
 
     const mockResponse = {} as Response;
@@ -266,7 +266,7 @@ describe('Delete Event by ID', () => {
 
     const mockRequest = {
       userId: mockUserId,
-      params: { eventId: mockEventId },
+      params: { id: mockEventId },
     } as unknown as ExtendedRequest;
 
     const mockResponse = {} as Response;
