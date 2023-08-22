@@ -57,7 +57,6 @@ describe('Create Event', () => {
   });
 });
 
-
 describe('Get Events', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -126,7 +125,6 @@ describe('Get Events', () => {
   });
 });
 
-
 describe('Get Event by ID', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -135,8 +133,7 @@ describe('Get Event by ID', () => {
   it('Should retrieve a specific event successfully!', async () => {
     const mockUserId = 'mockUserId';
     const mockEventId = 'mockEventId';
-    
-    // Create a mock request object with type assertion
+
     const mockRequest = {
       userId: mockUserId,
       params: { eventId: mockEventId },
@@ -166,7 +163,6 @@ describe('Get Event by ID', () => {
     const mockUserId = 'mockUserId';
     const mockEventId = 'mockEventId';
 
-    // Create a mock request object with type assertion
     const mockRequest = {
       userId: mockUserId,
       params: { eventId: mockEventId },
@@ -180,20 +176,11 @@ describe('Get Event by ID', () => {
 
     findOneSpy.mockRestore();
   });
-});
 
-
-
-describe('Get Event by ID', () => {
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it('Should retrieve a specific event successfully!', async () => {
+  it('Should handle "event not found" scenario', async () => {
     const mockUserId = 'mockUserId';
-    const mockEventId = 'mockEventId';
-    
-    // Create a mock request object with type assertion
+    const mockEventId = 'nonExistentEventId';
+
     const mockRequest = {
       userId: mockUserId,
       params: { eventId: mockEventId },
@@ -201,29 +188,28 @@ describe('Get Event by ID', () => {
 
     const mockResponse = {} as Response;
 
-    const mockEventData = {
-      _id: mockEventId,
-      description: 'Mock event description',
-      dayOfWeek: 'Monday',
-      userId: mockUserId,
-    };
-
-    const findOneSpy = jest.spyOn(EventModel, 'findOne').mockResolvedValueOnce(mockEventData);
+    const findOneSpy = jest.spyOn(EventModel, 'findOne').mockResolvedValueOnce(null);
 
     const retrievedEvent = await getEventById(mockRequest, mockResponse);
 
     expect(findOneSpy).toHaveBeenCalledWith({ _id: mockEventId, userId: mockUserId });
 
-    expect(retrievedEvent).toEqual(mockEventData);
+    expect(retrievedEvent).toBeNull();
 
     findOneSpy.mockRestore();
   });
+});
 
-  it('Should handle errors during event retrieval by ID', async () => {
+
+describe('Delete Event by ID', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('Should delete a specific event successfully!', async () => {
     const mockUserId = 'mockUserId';
     const mockEventId = 'mockEventId';
 
-    // Create a mock request object with type assertion
     const mockRequest = {
       userId: mockUserId,
       params: { eventId: mockEventId },
@@ -231,10 +217,64 @@ describe('Get Event by ID', () => {
 
     const mockResponse = {} as Response;
 
-    const findOneSpy = jest.spyOn(EventModel, 'findOne').mockRejectedValueOnce(new Error('Mock error'));
+    const deleteSpy = jest.spyOn(EventModel, 'findOneAndDelete').mockResolvedValueOnce({
+      _id: mockEventId,
+      description: 'Mock event description',
+      dayOfWeek: 'Monday',
+      userId: mockUserId,
+    });
 
-    await expect(getEventById(mockRequest, mockResponse)).rejects.toThrow();
+    const result = await deleteEventById(mockRequest, mockResponse);
 
-    findOneSpy.mockRestore();
+    expect(deleteSpy).toHaveBeenCalledWith({ _id: mockEventId, userId: mockUserId });
+
+    expect(result).toEqual({
+      message: `Event with ID ${mockEventId} has been deleted successfully.`,
+    });
+
+    deleteSpy.mockRestore();
+  });
+
+  it('Should handle "event not found" scenario', async () => {
+    const mockUserId = 'mockUserId';
+    const mockEventId = 'nonExistentEventId';
+
+    const mockRequest = {
+      userId: mockUserId,
+      params: { eventId: mockEventId },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const deleteSpy = jest.spyOn(EventModel, 'findOneAndDelete').mockResolvedValueOnce(null);
+
+    const result = await deleteEventById(mockRequest, mockResponse);
+
+    expect(deleteSpy).toHaveBeenCalledWith({ _id: mockEventId, userId: mockUserId });
+
+    expect(result).toEqual({
+      message: `No event with ID ${mockEventId} found for the signed-in user.`,
+    });
+
+    deleteSpy.mockRestore();
+  });
+
+  it('Should handle errors during event deletion by ID', async () => {
+    const mockUserId = 'mockUserId';
+    const mockEventId = 'mockEventId';
+
+    const mockRequest = {
+      userId: mockUserId,
+      params: { eventId: mockEventId },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const deleteSpy = jest.spyOn(EventModel, 'findOneAndDelete').mockRejectedValueOnce(new Error('Mock error'));
+
+    await expect(deleteEventById(mockRequest, mockResponse)).rejects.toThrow();
+
+    deleteSpy.mockRestore();
   });
 });
+
