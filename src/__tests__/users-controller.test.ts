@@ -1,4 +1,4 @@
-import CustomError from '../errors';
+import {NotFoundError, BadRequestError, UnauthorizedError}  from '../errors/api-errors';
 import UserModel from '../models/users';
 import { SignupData, SignInData } from '../interfaces/userTypes';
 import { signUpUser, signInUser } from '../controllers/user-controller';
@@ -69,7 +69,7 @@ describe("Sign Up User", () => {
 
     const findOneSpy = jest.spyOn(UserModel, "findOne").mockResolvedValueOnce(existingUser);
 
-    await expect(signUpUser(mockSignupData)).rejects.toThrow(CustomError.BadRequestError);
+    await expect(signUpUser(mockSignupData)).rejects.toThrow(BadRequestError);
 
     expect(findOneSpy).toHaveBeenCalledWith({ email: mockSignupData.email });
 
@@ -139,7 +139,7 @@ describe("Sign In User", () => {
 
     const findOneSpy = jest.spyOn(UserModel, "findOne").mockResolvedValueOnce(null);
 
-    await expect(signInUser(mockSignInData)).rejects.toThrow(CustomError.NotFoundError);
+    await expect(signInUser(mockSignInData)).rejects.toThrow(NotFoundError);
 
     expect(findOneSpy).toHaveBeenCalledWith({ email: mockSignInData.email });
 
@@ -166,7 +166,7 @@ describe("Sign In User", () => {
 
     const findOneSpy = jest.spyOn(UserModel, "findOne").mockResolvedValueOnce(mockUserDocument);
 
-    await expect(signInUser(mockSignInData)).rejects.toThrow(CustomError.UnauthorizedError);
+    await expect(signInUser(mockSignInData)).rejects.toThrow(UnauthorizedError);
 
     expect(findOneSpy).toHaveBeenCalledWith({ email: mockSignInData.email });
 
