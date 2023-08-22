@@ -1,4 +1,4 @@
-import CustomError from '../errors';
+import {BadRequestError, NotFoundError, UnauthorizedError} from '../errors/api-errors';
 import UserModel from '../models/users';
 import { SignupData, IUserDocument, SignInData } from '../interfaces/userTypes';
 
@@ -8,7 +8,7 @@ async function signUpUser(signupData: SignupData): Promise<IUserDocument> {
             email: signupData.email,
         });
         if (existingUser) {
-            throw new CustomError.BadRequestError('Email already exists');
+            throw new BadRequestError('Email already exists');
         }
 
         const newUser = new UserModel(signupData);
@@ -28,13 +28,13 @@ async function signInUser(signInData: SignInData): Promise<IUserDocument> {
         const user = await UserModel.findOne({ email });
 
         if (!user) {
-            throw new CustomError.NotFoundError('User not found');
+            throw new NotFoundError('User not found');
         }
 
         const isPasswordValid = await user.comparePassword(password);
 
         if (!isPasswordValid) {
-            throw new CustomError.UnauthorizedError('Invalid password');
+            throw new UnauthorizedError('Invalid password');
         }
 
         return user;
