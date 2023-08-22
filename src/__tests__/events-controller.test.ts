@@ -1,7 +1,7 @@
 import { ExtendedRequest } from '../middleware/authenticateUser';
 import { EventModel } from '../models/events';
 import { Response } from 'express';
-import { createEvent, getEvents, deleteEventsByDay  } from '../controllers/event-controller';
+import { createEvent, getEvents, deleteEventsByDay, getEventById, deleteEventById  } from '../controllers/event-controller';
 
 describe('Create Event', () => {
   afterEach(() => {
@@ -126,3 +126,58 @@ describe('Get Events', () => {
   });
 });
 
+
+describe('Get Event by ID', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('Should retrieve a specific event successfully!', async () => {
+    const mockUserId = 'mockUserId';
+    const mockEventId = 'mockEventId';
+    
+    // Create a mock request object with type assertion
+    const mockRequest = {
+      userId: mockUserId,
+      params: { eventId: mockEventId },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const mockEventData = {
+      _id: mockEventId,
+      description: 'Mock event description',
+      dayOfWeek: 'Monday',
+      userId: mockUserId,
+    };
+
+    const findOneSpy = jest.spyOn(EventModel, 'findOne').mockResolvedValueOnce(mockEventData);
+
+    const retrievedEvent = await getEventById(mockRequest, mockResponse);
+
+    expect(findOneSpy).toHaveBeenCalledWith({ _id: mockEventId, userId: mockUserId });
+
+    expect(retrievedEvent).toEqual(mockEventData);
+
+    findOneSpy.mockRestore();
+  });
+
+  it('Should handle errors during event retrieval by ID', async () => {
+    const mockUserId = 'mockUserId';
+    const mockEventId = 'mockEventId';
+
+    // Create a mock request object with type assertion
+    const mockRequest = {
+      userId: mockUserId,
+      params: { eventId: mockEventId },
+    } as unknown as ExtendedRequest;
+
+    const mockResponse = {} as Response;
+
+    const findOneSpy = jest.spyOn(EventModel, 'findOne').mockRejectedValueOnce(new Error('Mock error'));
+
+    await expect(getEventById(mockRequest, mockResponse)).rejects.toThrow();
+
+    findOneSpy.mockRestore();
+  });
+});
