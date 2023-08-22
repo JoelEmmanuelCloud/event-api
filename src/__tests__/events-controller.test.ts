@@ -1,6 +1,6 @@
 import { ExtendedRequest } from '../middleware/authenticateUser';
 import { EventModel } from '../models/events';
-import { Response } from 'express'; // Import Response type
+import { Response } from 'express';
 import { createEvent, getEvents, deleteEventsByDay  } from '../controllers/event-controller';
 
 describe('Create Event', () => {
@@ -17,7 +17,7 @@ describe('Create Event', () => {
       userId: 'mockUserId',
     } as ExtendedRequest;
 
-    const mockResponse = {} as Response; // Mock the Response object
+    const mockResponse = {} as Response;
 
     const mockEventDocument = {
       description: mockRequest.body.description,
@@ -27,11 +27,10 @@ describe('Create Event', () => {
 
     const saveSpy = jest.spyOn(EventModel.prototype, 'save').mockResolvedValueOnce(mockEventDocument);
 
-    const createdEvent = await createEvent(mockRequest, mockResponse); // Pass both req and res
+    const createdEvent = await createEvent(mockRequest, mockResponse);
 
     expect(saveSpy).toHaveBeenCalledWith();
 
-    // expect(createdEvent._id).toEqual(mockEventDocument._id);
     expect(createdEvent.description).toEqual(mockEventDocument.description);
     expect(createdEvent.dayOfWeek).toEqual(mockEventDocument.dayOfWeek);
     expect(createdEvent.userId).toEqual(mockEventDocument.userId);
@@ -48,7 +47,7 @@ describe('Create Event', () => {
       userId: 'mockUserId',
     } as ExtendedRequest;
 
-    const mockResponse = {} as Response; // Mock the Response object
+    const mockResponse = {} as Response; 
 
     const saveSpy = jest.spyOn(EventModel.prototype, 'save').mockRejectedValueOnce(new Error('Mock error'));
 
@@ -126,3 +125,4 @@ describe('Get Events', () => {
     findSpy.mockRestore();
   });
 });
+
