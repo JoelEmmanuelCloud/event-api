@@ -148,88 +148,9 @@ describe('Get Events', () => {
         findSpy.mockRestore();
     });
 
-    // Add more test cases as needed
+    
 });
 
-// describe('Get Events', () => {
-//     afterEach(() => {
-//         jest.restoreAllMocks();
-//     });
-
-//     it('Should retrieve events successfully!', async () => {
-//         const mockUserId = 'mockUserId';
-//         const mockRequest = {
-//             userId: mockUserId,
-//         } as ExtendedRequest;
-
-//         const mockResponse = {} as Response;
-
-//         const mockEventData = [
-//             {
-//                 _id: 'event1',
-//                 description: 'Event 1 description',
-//                 dayOfWeek: 'Monday',
-//                 userId: mockUserId,
-//             },
-//             {
-//                 _id: 'event2',
-//                 description: 'Event 2 description',
-//                 dayOfWeek: 'Tuesday',
-//                 userId: mockUserId,
-//             },
-//         ];
-
-//         const findSpy = jest
-//             .spyOn(EventModel, 'find')
-//             .mockResolvedValueOnce(mockEventData);
-
-//         const retrievedEvents = await getEvents(mockRequest, mockResponse);
-
-//         expect(findSpy).toHaveBeenCalledWith({ userId: mockUserId });
-
-//         expect(retrievedEvents).toEqual(mockEventData);
-
-//         findSpy.mockRestore();
-//     });
-
-//     it('Should handle no events', async () => {
-//         const mockUserId = 'mockUserId';
-//         const mockRequest = {
-//             userId: mockUserId,
-//         } as ExtendedRequest;
-
-//         const mockResponse = {} as Response;
-
-//         const findSpy = jest
-//             .spyOn(EventModel, 'find')
-//             .mockResolvedValueOnce([]);
-
-//         const retrievedEvents = await getEvents(mockRequest, mockResponse);
-
-//         expect(findSpy).toHaveBeenCalledWith({ userId: mockUserId });
-
-//         expect(retrievedEvents).toEqual([{ message: 'You have no events.' }]);
-
-//         findSpy.mockRestore();
-//     });
-
-//     it('Should handle errors during event retrieval', async () => {
-//         const mockUserId = 'mockUserId';
-//         const mockRequest = {
-//             userId: mockUserId,
-//         } as ExtendedRequest;
-
-//         const mockResponse = {} as Response;
-
-//         const findSpy = jest
-//             .spyOn(EventModel, 'find')
-//             .mockRejectedValueOnce(new Error('Mock error'));
-
-//         await expect(getEvents(mockRequest, mockResponse)).rejects.toThrow();
-
-//         findSpy.mockRestore();
-//     });
-// });
 
 describe('Get Event by ID', () => {
     afterEach(() => {
