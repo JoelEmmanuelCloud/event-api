@@ -125,7 +125,7 @@ describe('Get Events', () => {
 
         expect(findSpy).toHaveBeenCalledWith({ userId: mockUserId });
 
-        expect(retrievedEvents).toEqual([{ message: "You have no events." }]);
+        expect(retrievedEvents).toEqual([{ message: 'You have no events.' }]);
 
         findSpy.mockRestore();
     });
@@ -147,8 +147,6 @@ describe('Get Events', () => {
         findSpy.mockRestore();
     });
 });
-
-
 
 describe('Get Event by ID', () => {
     afterEach(() => {

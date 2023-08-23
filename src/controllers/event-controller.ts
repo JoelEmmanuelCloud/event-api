@@ -5,7 +5,6 @@ import { ExtendedRequest } from '../middleware/authenticateUser';
 
 type EventOrMessage = Event | { message: string };
 
-
 export async function createEvent(
     req: ExtendedRequest,
     res: Response,
@@ -35,7 +34,6 @@ export async function createEvent(
     }
 }
 
-
 export async function getEvents(
     req: ExtendedRequest,
     res: Response,
@@ -45,7 +43,7 @@ export async function getEvents(
         const events = await EventModel.find({ userId });
 
         if (events.length === 0) {
-            return [{ message: "You have no events." }];
+            return [{ message: 'You have no events.' }];
         }
 
         const formattedEvents: Event[] = events.map((event) => ({
@@ -54,15 +52,12 @@ export async function getEvents(
             dayOfWeek: event.dayOfWeek,
             userId: event.userId,
         }));
-        
+
         return formattedEvents;
     } catch (error) {
         throw error;
     }
 }
-
-
-
 
 export async function deleteEventsByDay(
     req: ExtendedRequest,
