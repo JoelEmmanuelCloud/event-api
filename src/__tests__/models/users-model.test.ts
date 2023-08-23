@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
-import UserModel from '../models/users';
-import bcrypt from 'bcryptjs';
+import UserModel from '../../models/users';
 import dotenv from 'dotenv';
-import connectDB from '../db/connectDB';
+import connectDB from '../../db/connectDB';
 
 dotenv.config();
 
@@ -53,7 +52,6 @@ describe('User Schema', () => {
 
     it('Should compare passwords correctly', async () => {
         const password = 'password123';
-        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await UserModel.create({
             firstName: 'Jane',
@@ -62,17 +60,18 @@ describe('User Schema', () => {
             city: 'Another City',
             country: 'Another Country',
             email: 'jane.smith@example.com',
-            password: hashedPassword,
+            password: password,
         });
 
         const isMatch = await user.comparePassword(password);
+
+        console.log('Password Match Result:', isMatch);
 
         expect(isMatch).toBe(true);
     }, 90000);
 
     it('Should return false for incorrect password comparison', async () => {
         const password = 'password123';
-        const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await UserModel.create({
             firstName: 'Alice',
@@ -81,7 +80,7 @@ describe('User Schema', () => {
             city: 'Yet Another City',
             country: 'Yet Another Country',
             email: 'alice.johnson@example.com',
-            password: hashedPassword,
+            password: password,
         });
 
         const isMatch = await user.comparePassword('incorrectPassword');

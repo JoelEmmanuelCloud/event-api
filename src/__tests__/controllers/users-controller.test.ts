@@ -2,10 +2,10 @@ import {
     NotFoundError,
     BadRequestError,
     UnauthorizedError,
-} from '../errors/api-errors';
-import UserModel from '../models/users';
-import { SignupData, SignInData } from '../interfaces/userTypes';
-import { signUpUser, signInUser } from '../controllers/user-controller';
+} from '../../errors/api-errors';
+import UserModel from '../../models/users';
+import { SignupData, SignInData } from '../../interfaces/userTypes';
+import { signUpUser, signInUser } from '../../controllers/user-controller';
 import { ObjectId } from 'mongodb';
 
 describe('Sign Up User', () => {

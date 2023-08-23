@@ -1,6 +1,6 @@
 import { DeleteResult } from 'mongodb';
-import { ExtendedRequest } from '../middleware/authenticateUser';
-import { EventModel } from '../models/events';
+import { ExtendedRequest } from '../../middleware/authenticateUser';
+import { EventModel } from '../../models/events';
 import { Response } from 'express';
 import {
     createEvent,
@@ -8,7 +8,7 @@ import {
     deleteEventsByDay,
     getEventById,
     deleteEventById,
-} from '../controllers/event-controller';
+} from '../../controllers/event-controller';
 
 describe('Create Event', () => {
     afterEach(() => {
