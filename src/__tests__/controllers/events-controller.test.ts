@@ -326,6 +326,10 @@ describe('Delete Event by ID', () => {
     });
 });
 
+
+
+
+
 describe('Delete Events by Day', () => {
     afterEach(() => {
         jest.restoreAllMocks();
@@ -337,7 +341,7 @@ describe('Delete Events by Day', () => {
 
         const mockRequest = {
             userId: mockUserId,
-            params: { dayOfWeek: mockDayOfWeek },
+            query: { dayOfWeek: mockDayOfWeek },
         } as unknown as ExtendedRequest;
 
         const mockResponse = {} as Response;
@@ -371,7 +375,7 @@ describe('Delete Events by Day', () => {
 
         const mockRequest = {
             userId: mockUserId,
-            params: { dayOfWeek: mockDayOfWeek },
+            query: { dayOfWeek: mockDayOfWeek },
         } as unknown as ExtendedRequest;
 
         const mockResponse = {} as Response;
@@ -405,7 +409,7 @@ describe('Delete Events by Day', () => {
 
         const mockRequest = {
             userId: mockUserId,
-            params: { dayOfWeek: mockDayOfWeek },
+            query: { dayOfWeek: mockDayOfWeek },
         } as unknown as ExtendedRequest;
 
         const mockResponse = {} as Response;
