@@ -89,7 +89,7 @@ To run unit tests and generate code coverage, use the following command:
     npx jest --coverage
 ```
 ### Expected Results:
-![testreport](https://github.com/JoelEmmanuelCloud/event-api/assets/123770803/b64586ae-c6ee-43cd-b4d6-7bd99ef326f6)
+![newtest](https://github.com/JoelEmmanuelCloud/event-api/assets/123770803/a7ca6680-f3ea-47fa-9ea5-da58fe6b8aed)
 
 
 ## Technologies Used
