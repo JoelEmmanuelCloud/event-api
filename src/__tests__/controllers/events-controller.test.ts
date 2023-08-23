@@ -147,10 +147,7 @@ describe('Get Events', () => {
 
         findSpy.mockRestore();
     });
-
-    
 });
-
 
 describe('Get Event by ID', () => {
     afterEach(() => {
