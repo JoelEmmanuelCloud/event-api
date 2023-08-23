@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a CRUD application that allows users to manage events. It provides endpoints for creating, reading, and deleting both events. The application uses token-based authentication to secure certain routes and store data in a MongoDB database. Input validation is performed using Joi, and the codebase follows Prettier and ESLint standards. Unit testing is implemented using Jest, aiming for at least 50% code coverage. The project utilizes JWT authentication and the token is sent in headers for security. Error handling is implemented throughout the application.
+This project is a CRUD application that allows users to manage events. It provides endpoints for creating, reading, and deleting events. The application uses token-based authentication to secure certain routes and store data in a MongoDB database. Input validation is performed using Joi, and the codebase follows Prettier and ESLint standards. Unit testing is implemented using Jest, aiming for at least 50% code coverage. The project utilizes JWT authentication and the token is sent in headers for security. Error handling is implemented throughout the application.
 
 ## Installation
 
@@ -46,7 +46,7 @@ If you don't already have a MongoDB account, you must create one to obtain your 
 ### Event Management
 
 -   Create new events with descriptions and days of the week.
--   Retrieve a list of events.
+-   Retrieve events by day of the week.
 -   Retrieve events by their unique ID.
 -   Delete events by ID and day of the week.
 
@@ -76,10 +76,10 @@ If you don't already have a MongoDB account, you must create one to obtain your 
 ### Event Routes
 
 -   `POST /events`: Create a new event (authentication required).
--   `GET /events`: Retrieve a list of events (authentication required).
+-   `GET /events`: Retrieve events by day of the week (authentication required).
+-   `DELETE /events`: Delete events by day of the week (authentication required).
 -   `GET /events/{id}`: Retrieve an event by ID (authentication required).
 -   `DELETE /events/{id}`: Delete an event by ID (authentication required).
--   `DELETE /events/{dayOfWeek}`: Delete events by day of the week (authentication required).
 
 ## Testing
 
