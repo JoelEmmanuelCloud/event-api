@@ -3,8 +3,6 @@ import { EventModel } from '../models/events';
 import { Event } from '../interfaces/eventTypes';
 import { ExtendedRequest } from '../middleware/authenticateUser';
 
-type EventOrMessage = Event | { message: string };
-
 export async function createEvent(
     req: ExtendedRequest,
     res: Response,
@@ -64,7 +62,7 @@ export async function deleteEventsByDay(
     res: Response,
 ): Promise<{ message: string }> {
     const userId = req.userId;
-    const dayOfWeekToDelete = req.params.dayOfWeek;
+    const dayOfWeekToDelete = req.query.dayOfWeek as string;
 
     try {
         const deletedEvents = await EventModel.deleteMany({
@@ -84,6 +82,7 @@ export async function deleteEventsByDay(
     }
 }
 
+
 export async function getEventById(
     req: ExtendedRequest,
     res: Response,
@@ -99,6 +98,8 @@ export async function getEventById(
         throw error;
     }
 }
+
+
 
 export async function deleteEventById(
     req: ExtendedRequest,
