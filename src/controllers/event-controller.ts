@@ -38,7 +38,15 @@ export async function getEvents(
 ): Promise<(Event | { message: string })[]> {
     try {
         const userId = req.userId;
-        const events = await EventModel.find({ userId });
+        const dayOfWeekFilter = req.query.dayOfWeek as string | undefined;
+
+        let eventsQuery: Partial<Event> = { userId };
+
+        if (dayOfWeekFilter) {
+            eventsQuery.dayOfWeek = dayOfWeekFilter;
+        }
+
+        const events = await EventModel.find(eventsQuery);
 
         if (events.length === 0) {
             return [{ message: 'You have no events.' }];
@@ -56,6 +64,7 @@ export async function getEvents(
         throw error;
     }
 }
+
 
 export async function deleteEventsByDay(
     req: ExtendedRequest,

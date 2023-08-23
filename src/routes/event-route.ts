@@ -59,6 +59,7 @@ router.get('/', authenticateUser, async (req: ExtendedRequest, res) => {
     }
 });
 
+
 router.delete(
     '/',
     authenticateUser,
