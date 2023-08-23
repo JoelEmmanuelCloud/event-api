@@ -65,7 +65,6 @@ export async function getEvents(
     }
 }
 
-
 export async function deleteEventsByDay(
     req: ExtendedRequest,
     res: Response,
@@ -91,7 +90,6 @@ export async function deleteEventsByDay(
     }
 }
 
-
 export async function getEventById(
     req: ExtendedRequest,
     res: Response,
@@ -107,8 +105,6 @@ export async function getEventById(
         throw error;
     }
 }
-
-
 
 export async function deleteEventById(
     req: ExtendedRequest,

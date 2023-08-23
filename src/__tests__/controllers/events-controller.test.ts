@@ -68,8 +68,6 @@ describe('Create Event', () => {
     });
 });
 
-
-
 describe('Get Events', () => {
     afterEach(() => {
         jest.restoreAllMocks();
@@ -100,7 +98,10 @@ describe('Get Events', () => {
 
         const retrievedEvents = await getEvents(mockRequest, mockResponse);
 
-        expect(findSpy).toHaveBeenCalledWith({ userId: mockUserId, dayOfWeek: mockDayOfWeekFilter });
+        expect(findSpy).toHaveBeenCalledWith({
+            userId: mockUserId,
+            dayOfWeek: mockDayOfWeekFilter,
+        });
 
         expect(retrievedEvents).toEqual(mockEventData);
 
@@ -149,8 +150,6 @@ describe('Get Events', () => {
 
     // Add more test cases as needed
 });
-
-
 
 // describe('Get Events', () => {
 //     afterEach(() => {
@@ -409,10 +408,6 @@ describe('Delete Event by ID', () => {
         deleteSpy.mockRestore();
     });
 });
-
-
-
-
 
 describe('Delete Events by Day', () => {
     afterEach(() => {

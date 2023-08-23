@@ -59,23 +59,17 @@ router.get('/', authenticateUser, async (req: ExtendedRequest, res) => {
     }
 });
 
-
-router.delete(
-    '/',
-    authenticateUser,
-    async (req: ExtendedRequest, res) => {
-        try {
-            const deletedEventsResponse = await deleteEventsByDay(req, res);
-            res.status(StatusCodes.OK).json(deletedEventsResponse);
-        } catch (error) {
-            const errorMessage = (error as Error).message;
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                message: errorMessage,
-            });
-        }
-    },
-);
-
+router.delete('/', authenticateUser, async (req: ExtendedRequest, res) => {
+    try {
+        const deletedEventsResponse = await deleteEventsByDay(req, res);
+        res.status(StatusCodes.OK).json(deletedEventsResponse);
+    } catch (error) {
+        const errorMessage = (error as Error).message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            message: errorMessage,
+        });
+    }
+});
 
 router.get('/:id', authenticateUser, async (req: ExtendedRequest, res) => {
     try {
@@ -96,22 +90,17 @@ router.get('/:id', authenticateUser, async (req: ExtendedRequest, res) => {
     }
 });
 
+router.delete('/:id', authenticateUser, async (req: ExtendedRequest, res) => {
+    try {
+        const event = await deleteEventById(req, res);
 
-router.delete(
-    '/:id',
-    authenticateUser,
-    async (req: ExtendedRequest, res) => {
-        try {
-            const event = await deleteEventById(req, res);
-
-            res.status(StatusCodes.OK).json(event);
-        } catch (error) {
-            const errorMessage = (error as Error).message;
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                message: errorMessage,
-            });
-        }
-    },
-);
+        res.status(StatusCodes.OK).json(event);
+    } catch (error) {
+        const errorMessage = (error as Error).message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            message: errorMessage,
+        });
+    }
+});
 
 export default router;
