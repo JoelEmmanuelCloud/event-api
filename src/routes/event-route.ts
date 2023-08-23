@@ -41,7 +41,16 @@ router.post('/', authenticateUser, async (req: ExtendedRequest, res) => {
 router.get('/', authenticateUser, async (req: ExtendedRequest, res) => {
     try {
         const events = await getEvents(req, res);
-        res.status(StatusCodes.OK).json(events);
+
+        if (
+            events.length === 1 &&
+            'message' in events[0] &&
+            events[0].message === "You have no events."
+        ) {
+            res.status(StatusCodes.OK).json({ message: "You have no events." });
+        } else {
+            res.status(StatusCodes.OK).json(events);
+        }
     } catch (error) {
         const errorMessage = (error as Error).message;
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -49,6 +58,20 @@ router.get('/', authenticateUser, async (req: ExtendedRequest, res) => {
         });
     }
 });
+
+
+
+// router.get('/', authenticateUser, async (req: ExtendedRequest, res) => {
+//     try {
+//         const events = await getEvents(req, res);
+//         res.status(StatusCodes.OK).json(events);
+//     } catch (error) {
+//         const errorMessage = (error as Error).message;
+//         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+//             message: errorMessage,
+//         });
+//     }
+// });
 
 router.delete(
     '/:dayOfWeek',
