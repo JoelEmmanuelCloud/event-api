@@ -90,8 +90,8 @@ To run unit tests and generate code coverage, use the following command:
 ```
 
 ### Expected Results:
+![Screenshot 2023-08-23 235751](https://github.com/JoelEmmanuelCloud/event-api/assets/123770803/36d2e321-67fe-4421-a979-280eb2d96171)
 
-![newtest](https://github.com/JoelEmmanuelCloud/event-api/assets/123770803/a7ca6680-f3ea-47fa-9ea5-da58fe6b8aed)
 
 ## Technologies Used
 
