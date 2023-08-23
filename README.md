@@ -2,7 +2,7 @@
 
 ## Description
 
-This project is a CRUD application that allows users to manage events. It provides endpoints for creating, reading and deleting both events. The application uses token-based authentication to secure certain routes and stores data in a MongoDB database. Input validation is performed using Joi, and the codebase follows Prettier and ESLint standards. Unit testing is implemented using Jest, aiming for at least 50% code coverage. The project utilizes JWT authentication, and the token is sent in headers for security. Error handling is implemented throughout the application.
+This project is a CRUD application that allows users to manage events. It provides endpoints for creating, reading, and deleting both events. The application uses token-based authentication to secure certain routes and store data in a MongoDB database. Input validation is performed using Joi, and the codebase follows Prettier and ESLint standards. Unit testing is implemented using Jest, aiming for at least 50% code coverage. The project utilizes JWT authentication and the token is sent in headers for security. Error handling is implemented throughout the application.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Clone the repository:
 
 ## Install dependencies:
 
-All dependencies have been pre-installed in the package.json file.
+All dependencies are pre-installed in the package.json file.
 
 Install the required dependencies using npm:
 
@@ -71,7 +71,7 @@ If you don't already have a MongoDB account, you must create one to obtain your 
 ### User Routes
 
 -   `POST /users/sign-up`: Sign up a new user.
--   `POST /users/sign-in`: Sign in an existing user.
+-   `POST /users/sign-in`: Sign in as an existing user.
 
 ### Event Routes
 
@@ -88,6 +88,9 @@ To run unit tests and generate code coverage, use the following command:
 ```bash
     npx jest --coverage
 ```
+### Expected Results:
+![newtest](https://github.com/JoelEmmanuelCloud/event-api/assets/123770803/a7ca6680-f3ea-47fa-9ea5-da58fe6b8aed)
+
 
 ## Technologies Used
 
