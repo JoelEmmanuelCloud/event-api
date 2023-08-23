@@ -104,20 +104,28 @@ describe('Get Events', () => {
 
         expect(findSpy).toHaveBeenCalledWith({ userId: mockUserId });
 
-        expect(retrievedEvents).toEqual([
-            {
-                _id: 'event1',
-                description: 'Event 1 description',
-                dayOfWeek: 'Monday',
-                userId: mockUserId,
-            },
-            {
-                _id: 'event2',
-                description: 'Event 2 description',
-                dayOfWeek: 'Tuesday',
-                userId: mockUserId,
-            },
-        ]);
+        expect(retrievedEvents).toEqual(mockEventData);
+
+        findSpy.mockRestore();
+    });
+
+    it('Should handle no events', async () => {
+        const mockUserId = 'mockUserId';
+        const mockRequest = {
+            userId: mockUserId,
+        } as ExtendedRequest;
+
+        const mockResponse = {} as Response;
+
+        const findSpy = jest
+            .spyOn(EventModel, 'find')
+            .mockResolvedValueOnce([]);
+
+        const retrievedEvents = await getEvents(mockRequest, mockResponse);
+
+        expect(findSpy).toHaveBeenCalledWith({ userId: mockUserId });
+
+        expect(retrievedEvents).toEqual([{ message: "You have no events." }]);
 
         findSpy.mockRestore();
     });
@@ -139,6 +147,8 @@ describe('Get Events', () => {
         findSpy.mockRestore();
     });
 });
+
+
 
 describe('Get Event by ID', () => {
     afterEach(() => {
