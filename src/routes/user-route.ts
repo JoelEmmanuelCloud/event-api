@@ -15,20 +15,12 @@ router.post('/sign-up', async (req, res) => {
             res.status(StatusCodes.BAD_REQUEST).json({ errors: error.details });
             return;
         }
-
         const user = await signUpUser(value);
-        const userResponse = {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            birthDate: user.birthDate,
-            city: user.city,
-            country: user.country,
-            email: user.email,
-            __v: user.__v,
-        };
 
-        res.status(StatusCodes.CREATED).json(userResponse);
+        const userWithoutPassword = { ...user.toObject() };
+        delete userWithoutPassword.password;
+
+        res.status(StatusCodes.CREATED).json(userWithoutPassword);
     } catch (error) {
         const errorMessage = (error as Error).message;
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
