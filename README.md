@@ -1,8 +1,9 @@
+![Compass.uol Logo](https://www.datanami.com/wp-content/uploads/2023/06/compass-uol.png)
 # CRUD Application for Users and Events
 
 ## Description
 
-This project is a CRUD application that allows users to manage events. It provides endpoints for creating, reading, and deleting events. The application uses token-based authentication to secure certain routes and store data in a MongoDB database. Input validation is performed using Joi, and the codebase follows Prettier and ESLint standards. Unit testing is implemented using Jest, aiming for at least 50% code coverage. The project utilizes JWT authentication and the token is sent in headers for security. Error handling is implemented throughout the application.
+This project is a CRUD application that allows users to manage events. It provides endpoints for creating, reading, and deleting events. The application uses token-based authentication to secure specific routes and store data in a MongoDB database. Input validation is performed using Joi, and the codebase follows Prettier and ESLint standards. Unit testing uses Jest, aiming for at least 50% code coverage. The project utilizes JWT authentication, sending the token in headers for security. Error handling is implemented throughout the application.
 
 ## Installation
 
