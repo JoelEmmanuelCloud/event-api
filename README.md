@@ -28,6 +28,7 @@ Install the required dependencies using npm:
 Create a `.env` file in the root directory of the project. Define the following environment variables in the `.env file`:
 
 ```bash
+    PORT=3000
     JWT_SECRET=jwtSecret
     JWT_LIFETIME=1d
     MONGO_URL = MongoDB connection string
